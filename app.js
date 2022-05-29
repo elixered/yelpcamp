@@ -1,4 +1,5 @@
 const express = require('express');
+const ejsMate = require('ejs-mate');
 const Campground = require('./models/campground');
 const app = express();
 const mongoose = require('mongoose');
@@ -16,6 +17,7 @@ mongoose.connect('mongodb://localhost:27017/yelp-camp',
     });
 
 const path = require('path');
+app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
