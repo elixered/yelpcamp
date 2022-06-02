@@ -3,6 +3,7 @@ const ejsMate = require('ejs-mate');
 const joi = require('joi');
 const { campgroundSchema } = require('./schemas.js');
 const Campground = require('./models/campground');
+const Review = require('./models/review');
 const app = express();
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
@@ -79,6 +80,16 @@ app.delete('/campgrounds/:id', catchAsync(async (req, res) => {
     const { id } = req.params;
     await Campground.findByIdAndDelete(id);
     res.redirect('/campgrounds');
+}));
+
+app.post('/campgrounds/:id/reviews', catchAsync(async (req, res) => {
+    // res.send('we made it');
+    const campground = await Campground.findById(req.params.id);
+    const review = new Review(req.body.review);
+    campground.reviews.push(review);
+    await review.save();
+    await campground.save();
+    res.redirect(`/campgrounds/${campground._id}`);
 }));
 
 app.all('*', (req, res, next) => {

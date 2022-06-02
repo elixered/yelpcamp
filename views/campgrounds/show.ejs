@@ -28,5 +28,29 @@
       </div>
       <div class="card-footer text-muted">2 days ago</div>
     </div>
+    <h2>Leave a Review</h2>
+    <form
+      action="/campgrounds/<%=campground._id%>/reviews"
+      method="POST"
+      class="mb-3"
+    >
+      <div class="mb-3">
+        <label for="rating" class="form-label" name="review[rating]"
+          >Rating</label
+        >
+        <input type="range" class="form-range" id="rating" />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="body">Review</label>
+        <textarea
+          class="form-control mb-3"
+          name="review[body]"
+          id="body"
+          cols="30"
+          rows="3"
+        ></textarea>
+        <button class="btn btn-success">Submit</button>
+      </div>
+    </form>
   </div>
 </div>
