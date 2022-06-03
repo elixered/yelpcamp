@@ -6,4 +6,7 @@ const reviewSchema = new Schema({
     rating: Number
 })
 // 'Review' is the name of the collection
+
+
+
 module.exports = mongoose.model('Review', reviewSchema);        
