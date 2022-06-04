@@ -9,6 +9,7 @@ const userSchema = new Schema({
         required: true  // this will make sure that the email is required
     }
 });
+
 userSchema.plugin(passportLocalMOngoose);
 
 module.exports = mongoose.model('User', userSchema);
