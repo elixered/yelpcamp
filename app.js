@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV != "production") {
+    require('dotenv').config();
+}
+console.log(process.env.CLOUDINARY_NAME);
 const express = require('express');
 const ejsMate = require('ejs-mate');
 const joi = require('joi');
@@ -9,6 +13,7 @@ const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const catchAsync = require('./utils/catchAsync');
 const ExpressError = require('./utils/ExpressError');
+
 
 const session = require('express-session');
 const flash = require('connect-flash');
