@@ -2,6 +2,8 @@ if (process.env.NODE_ENV != "production") {
     require('dotenv').config();
 }
 console.log(process.env.CLOUDINARY_NAME);
+
+
 const express = require('express');
 const ejsMate = require('ejs-mate');
 const joi = require('joi');
