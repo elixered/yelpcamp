@@ -9,7 +9,6 @@ const joi = require('joi');
 const { campgroundSchema, reviewSchema } = require('./schemas.js');
 const Campground = require('./models/campground');
 const Review = require('./models/review');
-const app = express();
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const catchAsync = require('./utils/catchAsync');
@@ -27,7 +26,7 @@ const campgroundRoutes = require('./routes/campgrounds.js');
 const reviewRoutes = require('./routes/reviews.js');
 const userRoutes = require('./routes/users.js');
 const secret = process.env.SECRET || "thisisverybadsecret";
-const dbUrl = process.env.DB_URL;
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/yelp-camp';
 
 mongoose.connect(dbUrl,
     {
@@ -40,6 +39,8 @@ mongoose.connect(dbUrl,
     .catch((err) => {
         console.log('mongo error!', err);
     });
+
+const app = express();
 
 const path = require('path');
 const { error } = require('console');
