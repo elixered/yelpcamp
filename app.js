@@ -1,7 +1,6 @@
-if (process.env.NODE_ENV != "production") {
+if (process.env.NODE_ENV !== "production") {
     require('dotenv').config();
 }
-console.log(process.env.CLOUDINARY_NAME);
 
 
 const express = require('express');
@@ -15,7 +14,7 @@ const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const catchAsync = require('./utils/catchAsync');
 const ExpressError = require('./utils/ExpressError');
-
+const helmet = require('helmet');
 
 const session = require('express-session');
 const flash = require('connect-flash');
@@ -51,6 +50,7 @@ app.use(methodOverride('_method'));
 app.use(express.static('public'));
 app.use(express.static(path.join(__dirname, 'public')));
 const sessionConfig = {
+    name: 'session',
     secret: 'thisshouldbeabettersecret',
     resave: false,
     saveUninitialized: false,
@@ -64,6 +64,66 @@ const sessionConfig = {
 
 app.use(session(sessionConfig));
 app.use(flash());
+// app.use(helmet());
+
+
+const scriptSrcUrls = [
+    "https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js",
+    "https://stackpath.bootstrapcdn.com/",
+    "https://api.tiles.mapbox.com/",
+    "https://api.mapbox.com/",
+    "https://kit.fontawesome.com/",
+    "https://cdnjs.cloudflare.com/",
+    "https://cdn.jsdelivr.net",
+];
+const styleSrcUrls = [
+    "https://kit-free.fontawesome.com/",
+    "https://stackpath.bootstrapcdn.com/",
+    "https://api.mapbox.com/",
+    "https://api.tiles.mapbox.com/",
+    "https://fonts.googleapis.com/",
+    "https://use.fontawesome.com/",
+    'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css',
+
+];
+const connectSrcUrls = [
+    "https://kit-free.fontawesome.com/",
+    "https://stackpath.bootstrapcdn.com/",
+    "https://api.mapbox.com/",
+    "https://api.tiles.mapbox.com/",
+    "https://use.fontawesome.com/",
+    "https://fonts.googleapis.com/",
+    "https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.js",
+    "https://api.mapbox.com/",
+    "https://a.tiles.mapbox.com/",
+    "https://b.tiles.mapbox.com/",
+    "https://events.mapbox.com/",
+    "https://res.cloudinary.com/aanand/",
+    "https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.js"
+];
+const fontSrcUrls = [];
+app.use(
+    helmet.contentSecurityPolicy({
+        directives: {
+            defaultSrc: [],
+            connectSrc: ["'self'", ...connectSrcUrls],
+            scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
+            styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
+            workerSrc: ["'self'", "blob:"],
+            objectSrc: [],
+            imgSrc: [
+                "'self'",
+                "blob:",
+                "data:",
+                "https:",
+                "https://res.cloudinary.com/aanand/", //SHOULD MATCH YOUR CLOUDINARY ACCOUNT! 
+                "https://images.unsplash.com/",
+            ],
+            fontSrc: ["'self'", ...fontSrcUrls],
+        },
+    })
+);
+
 
 app.use(passport.initialize());
 app.use(passport.session());
