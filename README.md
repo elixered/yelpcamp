@@ -39,3 +39,28 @@ Yelpcamp is an application that allows you to add campgrounds for other users to
     <li>Every Campground has it's location displayed seperately on a map</li>
   </ul>
 </ul>
+
+<h1>Built with</h1>
+<ul>
+  <h1>Front End</h1>
+  <ul>
+    <li>HTML, CSS, Bootsrap v5.0</li>
+    <li>EJS, EJS Mate</li>
+  </ul>
+  <h1>Back End</h1>
+  <ul>
+    <li>NodeJS ExpressJS MongoDB</li>
+    <li>cloudinary</li>
+    <li>MapBox</li>
+    <li>passport(local-strategy)</li>
+    <li>JOI</li>
+    <li>connect-flash</li>
+    <li>morgan</li>
+    <li>sessions</li>
+    <li>helmet</li>
+    <li>mongoSanitize</li>
+    <li>sanitizeHtml</li>
+    <li>Deployed using Heroku, database on MongoDB Atlas</li>
+  </ul>
+</ul>
+
