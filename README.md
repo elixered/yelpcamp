@@ -1,7 +1,6 @@
 # yelpcamp 
 Yelpcamp is an application that allows you to add campgrounds for other users to comment and rate, and view campgrounds added by other users.
 
-<h6>Action speak louder than words: https://anand-yelpcamp.herokuapp.com/</h6>
 
 <h1>Features</h1>
 <ul>
